@@ -1,5 +1,5 @@
-# bbgmBot
-bbgmBot is a Discord bot that reads and displays data from export files from the game http://www.basketball-gm.com/. It can do these things, among many more features:
+# Woj Bot
+Woj Bot is a fork of the bbgmBot Discord bot that reads and displays data from export files from the game http://www.basketball-gm.com/. It can do these things, among many more features:
 • Show player ratings, stats, and bio information.
 • Show team rosters with stats and contracts.
 • Show draft picks and projected records for teams.

@@ -31,7 +31,7 @@ teamCommands = ['roster', 'picks', 'pyramid', 'sos', 'ownspicks']
 leagueCommands = ['fa', 'pr', 'draft', 'deaths']
 totalCommands = nonExportCommands + playerCommands + teamCommands + leagueCommands
 #put any users that you want to be able to load exports into this list. The supplied user ID is mine, feel free to remove ;)
-adminUsers = [625806545610997762]
+adminUsers = [283015154034016257]
 
 
 @client.event
@@ -69,25 +69,25 @@ async def on_message(message):
             if command == 'brendan':
                 x=random.randint(1,5)
                 if x == 1:
-                    await message.channel.send("Brendan#8865 is the coolest person I know")
+                    await message.channel.send("Brendan#8865 needs to make his own bot")
                 if x == 2:
-                    await message.channel.send("Brendan#8865 is the smartest person I know")
+                    await message.channel.send("Brendan#8865 is the second-smartest person I know after jicem")
                 if x == 3:
-                    await message.channel.send("Brendan#8865 is super awesome and I am jealous of him")
+                    await message.channel.send("Brendan#8865 is jealous of how super-awesome jicem is sadly")
                 if x == 4:
-                    await message.channel.send("I wish I was more like Brendan#8865. He is so cool")
+                    await message.channel.send("I wish Brendan#8865 was more like jicem. He is so cool")
                 if x == 5:
-                    await message.channel.send("Being able to speak to Brendan#8865 is the highlight of my life")
+                    await message.channel.send("Being able to ruin Brendan's code is the highlight of my life")
 
             if command == 'help':
                 embed = discord.Embed(
-                        title='bbgmBot',
-                        description=f'Currently in {len(client.guilds)} servers, bbgmBot pulls information from Basketball GM and Zen GM Hockey exports.',
+                        title='Woj Bot',
+                        description=f'Currently in {len(client.guilds)} servers, Woj Bot pulls information from Basketball GM and Zen GM Hockey exports.',
                         color=0xE7AA00)
-                embed.set_footer(text="Made by ClevelandFan#6181 and Brendan#8865")
+                embed.set_footer(text="Made by ClevelandFan#6181 and Brendan#8865 and hosted by jicem#0990. Message jicem first if you have an issue with the bot.")
                 # embed.set_thumbnail(url='https://cdn.discordapp.com/attachments/829211052708855859/843262932179877928/55u7s4.jpg')
                 if message.channel.guild.me.guild_permissions.manage_messages == False:
-                    embed.add_field(name='Warning ⚠️', value='bbgmBot requires "manage messages" permissions in order to properly switch between embed screens on commands such as roster and stats.')
+                    embed.add_field(name='Warning ⚠️', value='Woj Bot requires "manage messages" permissions in order to properly switch between embed screens on commands such as roster and stats.')
                 embed.add_field(name="**Player Commands**",value="""
 • **-stats**
 • **-ratings**
@@ -1101,7 +1101,7 @@ async def on_message(message):
                     else:
                         await botEmbed.edit(content='', embed=secondaryEmbed)
                         try: await botEmbed.remove_reaction('➡️', message.author)
-                        except: await message.channel.send('>>> ---' + '\n' + '⚠️ **__Warning__:** bbgmBot requires "manage messages" permissions in order to properly switch back-and-forth between embed screens.' + '\n' + '---')
+                        except: await message.channel.send('>>> ---' + '\n' + '⚠️ **__Warning__:** Woj Bot requires "manage messages" permissions in order to properly switch back-and-forth between embed screens.' + '\n' + '---')
                     def check(reaction, user):
                         return reaction.message == botEmbed and user == message.author and str(reaction.emoji) == '⬅️'
                     try:
@@ -1486,7 +1486,7 @@ async def on_message(message):
                     else:
                         await botEmbed.edit(content='', embed=secondaryEmbed)
                         try: await botEmbed.remove_reaction('➡️', message.author)
-                        except: await message.channel.send('>>> ---' + '\n' + '⚠️ **__Warning__:** bbgmBot requires "manage messages" permissions in order to properly switch back-and-forth between embed screens.' + '\n' + '---')
+                        except: await message.channel.send('>>> ---' + '\n' + '⚠️ **__Warning__:** Woj Bot requires "manage messages" permissions in order to properly switch back-and-forth between embed screens.' + '\n' + '---')
                     def check(reaction, user):
                         return reaction.message == botEmbed and user == message.author and str(reaction.emoji) == '⬅️'
                     try:
@@ -1677,7 +1677,7 @@ async def on_message(message):
                     else:
                         await botEmbed.edit(content='', embed=secondaryEmbed)
                         try: await botEmbed.remove_reaction('➡️', message.author)
-                        except: await message.channel.send('>>> ---' + '\n' + '⚠️ **__Warning__:** bbgmBot requires "manage messages" permissions in order to properly switch back-and-forth between embed screens.' + '\n' + '---')
+                        except: await message.channel.send('>>> ---' + '\n' + '⚠️ **__Warning__:** Woj Bot requires "manage messages" permissions in order to properly switch back-and-forth between embed screens.' + '\n' + '---')
                     def check(reaction, user):
                         return reaction.message == botEmbed and user == message.author and str(reaction.emoji) == '⬅️'
                     try:
