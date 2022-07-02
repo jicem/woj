@@ -21,4 +21,4 @@ USAGE
 BUGS
 1. I'm aware that there are probably various issues, particularly when dealing with newer leagues that haven't been simmed very many seasons. If you can send an export file to me as well as which command(s) isn't/aren't working, I'll look into it.
 
-Made by ClevelandFan295
+Made by ClevelandFan295 and updated by Jicem
