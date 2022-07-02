@@ -101,6 +101,7 @@ async def on_message(message):
 • **-roster** (can show both contracts and stats)
 • **-picks**
 • **-ownspicks** (shows who owns the picks of said team)
+• **-sos** (shows SOS based on win percentage of opponents)
 • **-pyramid** (projected record based on TR, and SOS)
                 """, inline=False)
                 embed.add_field(name="**League Commands**",value="""
@@ -1391,7 +1392,7 @@ async def on_message(message):
                         content = content + addedLine + '\n'
                 regularEmbed.add_field(name='Owner of ' + teamAbbrev + ' Picks', value=content)
 
-            if command == 'pyramid' or command == 'sos':
+            if command == 'pyramid':
                 #first to calculate average TR of the league for pryamid win
                 totalTr = 0
                 for t in teams:
@@ -1451,9 +1452,6 @@ async def on_message(message):
                 pyramidWins = pyramidWin + gamesWon
                 pyramidLoses = round((settings['numGames'] - (gamesWon + gamesLost)) - pyramidWin, 1)
                 pyramidLoses = pyramidLoses + gamesLost
-                #if they used depricated -sos command, add a field for that
-                if command == 'sos':
-                    regularEmbed.add_field(name='-sos has moved', value='-pyramid and -sos have been merged into one command, now just -pyramid. -sos will still redirect you here temporarily.', inline=False)
                 regularEmbed.add_field(name=teamAbbrev + ' Projected Record: ' + str(pyramidWins) + '-' + str(pyramidLoses), value='Team SOS: ' + str(sosText) + '\n' + 'Pyramid win% (does not factor played games): ' + str(round(predictedWp, 3)).replace('0.', '.'), inline=False)
                 secondaryEmbed = discord.Embed(
                             title=teamName + ' (Stats)',
@@ -1462,6 +1460,36 @@ async def on_message(message):
                 secondaryEmbed.add_field(name='How Pyramid Wins Work', value="*The pyramid projected record factors in games already played (it only does 'projections' for games remaining on the schedule, and adds them to current record), team rating, and strength of schedule. It does not factor injuries, stats, or team makeup (so consider differing from the pyramid record to tell a story about roster construction). The way it works is it compares a team rating to the league average team rating (a team with exactly the average would have a .500 pyramid win %, not accounting for schedule) and then applying a boost for a weak schedule and vice versa.*")
                 secondaryEmbed.set_footer(text="Click the ⬅️  arrow to go pack to the pyramid wins projection | Made by ClevelandFan#6181 and Brendan#8865")   
                 secondEmbed = True
+            
+            #standalone sos calculation
+            if command == 'sos':
+                opponentWins = 0
+                opponentLoses = 0
+                opponentTR = 0
+                gamesPlayed = 0
+                avgTR = 0
+                if schedule == "":
+                    sosText = "No schedule found in this export."
+                    sos = 0.5
+                else:
+                    for g in schedule:
+                        gamesPlayed += 1
+                        if g['homeTid'] == winningTid:
+                            for t in teams:
+                                if t['tid'] == g['awayTid']:
+                                    opponentWins += t['seasons'][-1]['won']
+                                    opponentLoses += t['seasons'][-1]['lost']
+                                    opponentTR += t['seasons'][-1]['ovrStart']
+                        if g['awayTid'] == winningTid:
+                            for t in teams:
+                                if t['tid'] == g['homeTid']:
+                                    opponentWins += t['seasons'][-1]['won']
+                                    opponentLoses += t['seasons'][-1]['lost']
+                                    opponentTR += t['seasons'][-1]['ovrStart']
+                    sos = round(opponentWins / (opponentWins + opponentLoses), 3)
+                    sosText = str(sos).replace('0.', '.')
+                    avgTR = round(opponentTR / gamesPlayed, 3)
+                regularEmbed.add_field(name=teamAbbrev + ' SOS', value='Average Opponent Win Percentage: ' + str(sosText) + '\n' + 'Average Opponent TR at Start of Season: ' + str(avgTR))
 
             #send the embed and set up second embed
             if secondEmbed == True:
